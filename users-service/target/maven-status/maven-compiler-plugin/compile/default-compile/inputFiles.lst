@@ -1,0 +1,4 @@
+/home/fbt1k/game-market-platform/users-service/src/main/java/com/example/market/users/model/User.java
+/home/fbt1k/game-market-platform/users-service/src/main/java/com/example/market/users/repository/UserRepository.java
+/home/fbt1k/game-market-platform/users-service/src/main/java/com/example/market/users/controller/UserController.java
+/home/fbt1k/game-market-platform/users-service/src/main/java/com/example/market/users/UsersApplication.java

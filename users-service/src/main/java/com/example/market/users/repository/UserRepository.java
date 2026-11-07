@@ -1,12 +1,13 @@
 package com.example.market.users.repository;
 
-import com.example.market.users.model.User;
-import org.springframework.stereorype.Repository;
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.stereotype.Repository;
+
+import com.example.market.users.model.User;
 
 @Repository
 public class UserRepository {
