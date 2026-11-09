@@ -1,0 +1,8 @@
+com/example/market/market/config/RestConfig.class
+com/example/market/market/model/Item.class
+com/example/market/market/repository/ItemRepository.class
+com/example/market/market/controller/MarketController.class
+com/example/market/market/model/MarketLot.class
+com/example/market/market/repository/MarketLotRepository.class
+com/example/market/market/MarketApplication.class
+com/example/market/market/service/MarketService.class

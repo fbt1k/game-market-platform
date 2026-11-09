@@ -2,9 +2,13 @@ package com.example.market.market.model;
 
 
 
-import jakarta.persistence.*;
-
 import java.math.BigDecimal;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
 
@@ -20,7 +24,9 @@ public class MarketLot {
     private BigDecimal price;
     private String status; // active/sold/canceled
 
-    public MarketLot(Long itemID, Long sellerId, BigDecimal price, String status){
+    public MarketLot() {}
+
+    public MarketLot(Long itemId, Long sellerId, BigDecimal price, String status) {
         this.itemId = itemId;
         this.sellerId = sellerId;
         this.price = price;

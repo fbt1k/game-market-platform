@@ -1,0 +1,8 @@
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/config/RestConfig.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/controller/MarketController.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/MarketApplication.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/repository/ItemRepository.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/service/MarketService.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/model/MarketLot.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/model/Item.java
+/home/fbt1k/game-market-platform/market-service/src/main/java/com/example/market/market/repository/MarketLotRepository.java
