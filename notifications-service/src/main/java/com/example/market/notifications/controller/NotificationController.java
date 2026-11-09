@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/notifications")
 public class NotificationController {
 
-    @PostMapping
+    @PostMapping(consumes= {"text/plain", "application/json", "*/*"})
     public ResponseEntity<Void> sendNotification(@RequestBody String message) {
         System.out.println("\u001B[33m[УВЕДОМЛЕНИЕ СО СДЕЛКИ]: " + message + "\u001B[0m");
         return ResponseEntity.ok().build();
