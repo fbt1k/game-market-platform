@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  
+  db:
+    image: postgres:16-alpine
+    container_name: market-postgres-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "1234"
+    volumes:
+      - pg_market_data:/var/lib/postgresql/data
+    networks:
+      - market-network
+
+  
+  api-gateway:
+    build: ./api-gateway
+    container_name: market-api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - users-service
+      - market-service
+      - notifications-service
+    networks:
+      - market-network
+
+  
+  users-service:
+    build: ./users-service
+    container_name: market-users-service
+    ports:
+      - "8081:8081"
+    networks:
+      - market-network
+
+  
+  market-service:
+    build: ./market-service
+    container_name: market-market-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=app
+      - DB_USER=postgres
+      - DB_PASSWORD=1234
+    networks:
+      - market-network
+
+  
+  notifications-service:
+    build: ./notifications-service
+    container_name: market-notifications-service
+    ports:
+      - "8083:8083"
+    networks:
+      - market-network
+
+
+volumes:
+  pg_market_data:
+
+
+networks:
+  market-network:
+    driver: bridge
