@@ -8,7 +8,6 @@ import com.example.market.market.repository.MarketLotRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -24,12 +23,12 @@ public class MarketService {
         this.restTemplate = restTemplate;
     }
 
-    public Item creaItem(Item item) {
+    public Item createItem(Item item) {
         return itemRepository.save(item);
     }
 
     public MarketLot createLot(MarketLot lot) {
-        lot.setStats("ACTIVE");
+        lot.setStatus("ACTIVE");
         return marketLotRepository.save(lot);
     }
 
@@ -37,7 +36,6 @@ public class MarketService {
         return marketLotRepository.findByStatus("ACTIVE");
     }
 
-    //логика покупки
     public void buyItem(Long lotId, Long buyerId) {
         MarketLot lot = marketLotRepository.findById(lotId)
                 .orElseThrow(() -> new RuntimeException("Лот не найден"));
@@ -49,7 +47,6 @@ public class MarketService {
         Item item = itemRepository.findById(lot.getItemId())
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
 
-        // http put запрос в user service списать деньги
         String decreaseUrl = "http://users-service:8081/api/users/" + buyerId + "/balance?amount=" + lot.getPrice().negate();
         try {
             restTemplate.put(decreaseUrl, null);
@@ -64,12 +61,11 @@ public class MarketService {
         marketLotRepository.save(lot);
 
         String logMessage = String.format("Игрок ID %d успешно купил '%s' за %s монет у игрока ID %d.",
-                buyerId, item.getTitle(), lot.getPrice().toString(), lot.getSellerId());
+                buyerId, item.getTitle(), lot.getPrice(), lot.getSellerId());
 
-        // http post запрос в севис уведомлений
         String notificationUrl = "http://notifications-service:8083/api/notifications";
         try {
-            restTemplate.postForEntity(NotificationUrl, logMessage, Void.class);
+            restTemplate.postForEntity(notificationUrl, logMessage, Void.class);
         } catch (Exception e) {
             System.out.println("Сервис недоступен, сделка зафиксирована в базе данных");
         }
