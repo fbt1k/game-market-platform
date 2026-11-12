@@ -8,9 +8,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: app
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB:  ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - pg_market_data:/var/lib/postgresql/data
     networks:
@@ -49,9 +49,9 @@ services:
     environment:
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_NAME=app
-      - DB_USER=postgres
-      - DB_PASSWORD=1234
+      - DB_NAME={DB_NAME}
+      - DB_USER={DB_USER}
+      - DB_PASSWORD={DB_PASSWORD}
     networks:
       - market-network
 

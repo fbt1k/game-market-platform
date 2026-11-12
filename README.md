@@ -35,6 +35,7 @@ mvn clean package -DskipTests
 ### Шаг 2. Развертывание в Docker Compose
 Запустите сборку докер-образов и поднятие всей инфраструктуры одной командой:
 ```bash
+cp .env.example .env
 docker compose up --build
 ```
 После успешного старта `market-service` самостоятельно подключится к PostgreSQL и автоматически создаст необходимые таблицы в базе данных (`items` и `market_lots`).
