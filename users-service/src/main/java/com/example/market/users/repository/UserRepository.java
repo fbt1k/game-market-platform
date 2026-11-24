@@ -25,4 +25,8 @@ public class UserRepository {
     public Optional<User> findById(long id){
         return Optional.ofNullable(users.get(id));
     }
+    
+    public Optional<User> findByIdForUpdate(long id) {
+        return findById(id);
+    }
 }
