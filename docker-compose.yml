@@ -35,6 +35,15 @@ services:
     container_name: market-users-service
     ports:
       - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=users_db
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+    
     networks:
       - market-network
 
@@ -65,9 +74,9 @@ services:
       - market-network
 
 
-volumes:
-  pg_market_data:
-
+    volumes:
+      - pg_market_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
 
 networks:
   market-network:
