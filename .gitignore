@@ -26,3 +26,4 @@ replay_pid*
 pom.xml
 README.md
 .vscode
+.env
