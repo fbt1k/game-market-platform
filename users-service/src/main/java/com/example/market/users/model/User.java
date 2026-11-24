@@ -2,6 +2,8 @@ package com.example.market.users.model;
 
 import java.math.BigDecimal;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+@Entity
 public class User {
     private Long id;
     private String username;
