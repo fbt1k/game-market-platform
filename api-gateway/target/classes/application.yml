@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: users-service-route
+          uri: http://users-service:8081
+          predicates:
+            - Path=/api/users/**
+        - id: market-service-route
+          uri: http://market-service:8082
+          predicates:
+            - Path=/api/market/**
+        - id: notifications-service-route
+          uri: http://notifications-service:8083
+          predicates:
+            - Path=/api/notifications/**
