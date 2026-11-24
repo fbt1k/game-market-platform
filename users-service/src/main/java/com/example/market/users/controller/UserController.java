@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.market.users.model.User;
 import com.example.market.users.repository.UserRepository;
@@ -41,9 +42,10 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}/balance")
+        @PutMapping("/{id}/balance")
+    @Transactional
     public ResponseEntity<Void> updateBalance(@PathVariable Long id, @RequestParam BigDecimal amount) {
-        User user = userRepository.findById(id).orElse(null);
+        User user = userRepository.findByIdForUpdate(id).orElse(null);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
@@ -52,8 +54,8 @@ public class UserController {
         if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
             return ResponseEntity.badRequest().build();
         }
+
         user.setBalance(newBalance);
-        userRepository.save(user);
         return ResponseEntity.ok().build();
     }
 }
