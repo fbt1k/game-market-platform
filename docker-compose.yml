@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   
   db:
@@ -12,7 +10,13 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - pg_market_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     networks:
       - market-network
 
@@ -36,7 +40,8 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - db
+       db:
+        condition: service_healthy
     environment:
       - DB_HOST=db
       - DB_PORT=5432
@@ -54,13 +59,14 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - db
+       db:
+        condition: service_healthy
     environment:
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_NAME={DB_NAME}
-      - DB_USER={DB_USER}
-      - DB_PASSWORD={DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - market-network
 
@@ -72,11 +78,18 @@ services:
       - "8083:8083"
     networks:
       - market-network
-
+  frontend:
+    build: ./frontend
+    container_name: market-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - market-network
 
     volumes:
-      - pg_market_data:/var/lib/postgresql/data
-      - ./db-init:/docker-entrypoint-initdb.d
+      db_data:
 
 networks:
   market-network:
