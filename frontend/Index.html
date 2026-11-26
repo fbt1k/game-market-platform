@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Market</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Game Market</h1>
+  <div class="me">
+    Игрок id: <input id="uid" type="number" min="1">
+    <button id="btnSelect">Выбрать</button>
+    <span id="meInfo">не выбран</span>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Новый игрок</h2>
+    <label>Имя</label><input id="uname">
+    <label>Стартовый баланс</label><input id="ubal" type="number" min="0" value="1000">
+    <button id="btnCreateUser">Создать</button>
+  </section>
+
+  <section class="card">
+    <h2>Новый предмет (каталог)</h2>
+    <label>Название</label><input id="iname">
+    <label>Редкость</label>
+    <select id="irar"><option>COMMON</option><option>RARE</option><option>EPIC</option><option>LEGENDARY</option></select>
+    <button id="btnCreateItem">Создать предмет</button>
+  </section>
+
+  <section class="card wide">
+    <h2>Выставить лот (продавец - выбранный игрок)</h2>
+    <label>Предмет</label><select id="itemSel"></select>
+    <label>Цена</label><input id="price" type="number" min="1" value="100">
+    <button id="btnCreateLot">Выставить</button>
+  </section>
+
+  <section class="card wide">
+    <h2>Активные лоты</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Предмет</th><th>Редкость</th><th>Цена</th><th>Продавец</th><th></th></tr></thead>
+      <tbody id="lots"></tbody>
+    </table>
+    <button id="btnRefresh">Обновить</button>
+  </section>
+</main>
+
+<div id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
