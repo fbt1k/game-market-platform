@@ -27,6 +27,10 @@ public class MarketService {
         return itemRepository.save(item);
     }
 
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
     public MarketLot createLot(MarketLot lot) {
         lot.setStatus("ACTIVE");
         return marketLotRepository.save(lot);

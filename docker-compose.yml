@@ -22,7 +22,9 @@ services:
 
   
   api-gateway:
-    build: ./api-gateway
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
     container_name: market-api-gateway
     ports:
       - "8080:8080"
@@ -35,7 +37,9 @@ services:
 
   
   users-service:
-    build: ./users-service
+    build:
+      context: .
+      dockerfile: users-service/Dockerfile
     container_name: market-users-service
     ports:
       - "8081:8081"
@@ -54,7 +58,9 @@ services:
 
   
   market-service:
-    build: ./market-service
+    build:
+      context: .
+      dockerfile: market-service/Dockerfile
     container_name: market-market-service
     ports:
       - "8082:8082"
@@ -72,7 +78,9 @@ services:
 
   
   notifications-service:
-    build: ./notifications-service
+    build:
+      context: .
+      dockerfile: notifications-service/Dockerfile
     container_name: market-notifications-service
     ports:
       - "8083:8083"
@@ -88,8 +96,8 @@ services:
     networks:
       - market-network
 
-    volumes:
-      db_data:
+volumes:
+  db_data:
 
 networks:
   market-network:

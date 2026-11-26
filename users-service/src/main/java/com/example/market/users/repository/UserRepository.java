@@ -11,7 +11,7 @@ import com.example.market.users.model.User;
 
 import jakarta.persistence.LockModeType;
 
-public interface UserReository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT u FROM User u WHERE u.id = :id")
     Optional<User> findByIdForUpdate(@Param("id") Long id);

@@ -51,4 +51,9 @@ public class MarketController {
         marketService.buyItem(lotId, buyerId);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/items")
+    public ResponseEntity<List<Item>> getItems() {
+        return ResponseEntity.ok(marketService.getAllItems());
+    }
 }
